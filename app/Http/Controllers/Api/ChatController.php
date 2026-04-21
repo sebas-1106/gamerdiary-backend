@@ -15,7 +15,7 @@ class ChatController extends Controller
             'mensaje' => 'required|string',
         ]);
 
-        $apiKey = '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';
+        $apiKey = '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';
         $mensaje = $request->mensaje;
 
         $response = Http::withHeaders([
@@ -44,9 +44,9 @@ class ChatController extends Controller
         ]);
 
         return response()->json([
-        'mensaje'      => $mensaje,
-        'respuesta_ia' => $respuestaIA,
-        ]);
+    'mensaje'      => $mensaje,
+    'respuesta_ia' => $respuestaIA
+]);
         
     }
 
