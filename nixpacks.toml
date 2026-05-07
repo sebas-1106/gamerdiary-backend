@@ -1,0 +1,5 @@
+[phases.deploy]
+cmds = [
+    "php artisan migrate --force",
+    "php artisan db:seed --class=UsuarioSeeder --force"
+]
