@@ -61,6 +61,7 @@ class EmpleadoController extends Controller
             $empleado->usuario->update([
                 'nombre' => $request->nombre ?? $empleado->usuario->nombre,
                 'email'  => $request->email ?? $empleado->usuario->email,
+                'rol'    => $request->rol ?? $empleado->usuario->rol,
             ]);
         }
 
