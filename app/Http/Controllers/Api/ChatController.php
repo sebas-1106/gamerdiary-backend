@@ -15,14 +15,14 @@ class ChatController extends Controller
             'mensaje' => 'required|string',
         ]);
 
-        $apiKey = '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';
+        $apiKey = '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';
         $mensaje = $request->mensaje;
 
-        $response = Http::withHeaders([
+        $response = Http::timeout(30)->withHeaders([
             'Authorization' => "Bearer {$apiKey}",
             'Content-Type'  => 'application/json',
-        ])->post('https://openrouter.ai/api/v1/chat/completions', [
-            'model' => 'nvidia/nemotron-3-super-120b-a12b:free',
+        ])->post('https://api.groq.com/openai/v1/chat/completions', [
+            'model' => 'llama-3.1-8b-instant',
             'messages' => [
                 [
                     'role'    => 'system',
@@ -44,18 +44,19 @@ class ChatController extends Controller
         ]);
 
         return response()->json([
-    'mensaje'      => $mensaje,
-    'respuesta_ia' => $respuestaIA
-]);
-        
+            'mensaje'      => $mensaje,
+            'respuesta_ia' => $respuestaIA,
+            'debug'        => $response->json(),
+            'status'       => $response->status(),
+        ]);
     }
 
     public function historial(Request $request)
-{
-    $mensajes = MensajeChat::where('usuario_id', $request->user()->id)
-        ->orderBy('fecha_envio', 'asc')
-        ->get();
+    {
+        $mensajes = MensajeChat::where('usuario_id', $request->user()->id)
+            ->orderBy('fecha_envio', 'asc')
+            ->get();
 
-    return response()->json($mensajes);
-}
+        return response()->json($mensajes);
+    }
 }
