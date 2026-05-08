@@ -9,7 +9,7 @@ class ServicioSeeder extends Seeder
 {
     public function run(): void
     {
-        DB::table('servicios')->truncate();
+        DB::table('servicios')->delete();
 
         DB::table('servicios')->insert([
             [
