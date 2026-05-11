@@ -15,7 +15,7 @@ class ChatController extends Controller
             'mensaje' => 'required|string',
         ]);
 
-        $apiKey = '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';
+        $apiKey = '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';
         $mensaje = $request->mensaje;
 
         $response = Http::timeout(30)->withHeaders([
@@ -45,9 +45,7 @@ class ChatController extends Controller
 
         return response()->json([
             'mensaje'      => $mensaje,
-            'respuesta_ia' => $respuestaIA,
-            'debug'        => $response->json(),
-            'status'       => $response->status(),
+            'respuesta_ia' => $respuestaIA
         ]);
     }
 
